@@ -13,19 +13,25 @@
 <head>
 	<title></title>
 	<script src="lib/qrcode.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
 <body>
 
 <div id="qrcode"></div>
+
 <script type="text/javascript">
 var qrcode = new QRCode("qrcode", {
-    text: "http://jindo.dev.naver.com/collie",
+    text: "My String to QR-fy",
     width: 128,
     height: 128,
     colorDark : "#000000",
     colorLight : "#ffffff",
     correctLevel : QRCode.CorrectLevel.H
 });
+
+console.log(JSON.stringify(qrcode,null,4));
+
+
 </script>
 
 </body>;
