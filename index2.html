@@ -1,0 +1,97 @@
+<!-- 
+ * Vitacenter
+ *
+ * Author: Francisco Javier Martínez Lago
+ *
+ * Purpose: simulate vitacenter for the purposes of clicking a button to send an
+ * AJAX call with a PK-Client to a service that generates a QR code by using the PKClient 
+ * and an implicit PkPro
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Website</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="lib/jquery.qrcode.min.js"></script>
+	
+</head>
+<body>
+	<canvas id="output" width="421" height="596">My Canvas</canvas>
+	<script>
+
+		var gWidthTemplate = 412;
+		var gHeightTemplate = 596;
+		var gQRxCoord = 119;
+		var gQRyCoord = 278;
+		var gQRwidth = gQRheight = 176;
+
+		jQuery(function() {
+			jQuery('#output').qrcode("http://www.google.com");
+
+			var canvas = $('#output canvas');
+			console.log(canvas);
+
+			img = canvas.get(0).toDataURL("image/png");
+
+			myGlobalVar = img;
+			//document.write('<img id="qrcode" src="'+ img +'"/>'); // Now we have a variable called img that contains our image in data URI form
+	});
+	/*
+		Set alert(s) so that we can see where exactly images are being loaded
+	 */
+	
+    var c = document.getElementById("output");
+    		 
+    if (c != null) {
+    	var ctx = c.getContext("2d");
+    	//ctx.clearRect(0, 0, 421, 596);
+
+    	var imageObj1 = new Image();
+
+    	imageObj1.src = "template.jpg";
+    	// imageObj2.src = myGlobalVar;
+    	imageObj1.onload = function() {
+
+    		ctx.drawImage(imageObj1, 0, 0, gWidthTemplate, gHeightTemplate);
+    		// imageObj2.onload = function() {
+    		// 	ctx.drawImage(imageObj2, 15, 85, 300, 300);
+    		// 	var img = c.toDataURL("image/png");
+    		// 	document.write('<img src="' + img + '" width="421" height="596"/>');
+    		// }
+    		// 
+    		jQuery(function() { 
+
+    			jQuery('#output').qrcode("http://www.google.com");
+    			
+    			var canvas = $('#output canvas');
+    			
+    			console.log(canvas);
+
+    			img = canvas.get(0).toDataURL("image/png");
+
+    			var imageObj2 = new Image();
+
+    			imageObj2.onload = function() {
+    				ctx.drawImage(imageObj2,gQRxCoord,gQRyCoord,gQRwidth,gQRheight);
+    			}
+
+    			imageObj2.src = img;
+
+
+				//document.write('<img src="' + img + '" width="421" height="596"/>');
+
+    			//ctx.drawImage(img,0,0,128,128);
+    		});
+    	}
+    }
+    else {
+    	console.log("c is null");
+    }
+
+
+
+</script>
+
+</body>
+</html>
